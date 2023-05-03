@@ -27,7 +27,7 @@ function Switch-MonitorInputs {
     # For Samsung 32UR59C monitor VCP input codes - DisplayPort: 15, HDMI: 6
     $Samsung_HDMI = 6
     $Samsung_DisplayPort = 15
-    # HP 24" monitor VCP input codes - VGA: 1, DVI:3, HDMI: 17
+    # HP 24uh monitor VCP input codes - VGA: 1, DVI:3, HDMI: 17
     $HP_HDMI = 17
     $HP_DVI = 3
 
