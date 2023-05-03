@@ -5,7 +5,7 @@ function Switch-MonitorInputs {
     )
     
     #Monitor names found in the ControlMyMonotor app in the top drop down menu for the monitor 
-    #selector between the model number and \\.\DISPALY...
+    #selector between the model number and \\.\DISPLAY...
     #The \\.\DISPLAY1\Monitor0 name will work too, but can change from time to time if a monitor 
     #is disconnected and reconnected
     $MonNameSamsungLeft = "H1AK500000"
