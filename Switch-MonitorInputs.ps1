@@ -8,9 +8,9 @@ function Switch-MonitorInputs {
     #selector between the model number and \\.\DISPLAY...
     #The \\.\DISPLAY1\Monitor0 name will work too, but can change from time to time if a monitor 
     #is disconnected and reconnected
-    $MonNameSamsungLeft = "H1AK500000"
-    $MonNameSamsungRight = "HNAW201368"
-    $MonNameHP24in = "CNK7500YPK"
+    $MonNameSamsungLeft = "HNAW201368"
+    $MonNameSamsungRight = "H1AK500000"
+    $MonNameHP24in = "CNK7500YPK" #3rd Monitor
 
     function Set-MonitorInputs {
         param (
@@ -44,14 +44,14 @@ function Switch-MonitorInputs {
     }
     elseif ($Device -eq 'Laptop') {
         #Set inputs for Laptop
-        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
-        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
+        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
+        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort        
         Set-MonitorInputs -Monitor $MonNameHP24in -InputCode $HP_HDMI
     }
     else {
         #Set Inputs for Desktop
-        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
-        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort
+        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
+        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
         Set-MonitorInputs -Monitor $MonNameHP24in -InputCode $HP_DVI
     }
 }
