@@ -4,7 +4,10 @@ function Switch-MonitorInputs {
         $Device
     )
     
-    #Monitor names found in the ControlMyMonotor app
+    #Monitor names found in the ControlMyMonotor app in the top drop down menu for the monitor 
+    #selector between the model number and \\.\DISPALY...
+    #The \\.\DISPLAY1\Monitor0 name will work too, but can change from time to time if a monitor 
+    #is disconnected and reconnected
     $MonNameSamsungLeft = "H1AK500000"
     $MonNameSamsungRight = "HNAW201368"
     $MonNameHP24in = "CNK7500YPK"
@@ -22,6 +25,8 @@ function Switch-MonitorInputs {
         Start-Process $MonTool -ArgumentList "/SetValue $Monitor 60 $InputCode"
     }
 
+    #Determining VCP codes for the inputs takes looking in the ControlMyMonitor 
+    #app and some trial and error
     # For Samsung 32UR59C monitor VCP input codes - DisplayPort: 15, HDMI: 6
     $Samsung_HDMI = 6
     $Samsung_DisplayPort = 15
