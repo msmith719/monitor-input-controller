@@ -3,8 +3,6 @@ function Switch-MonitorInputs {
         [Parameter(Mandatory=$false)] [ValidateSet("Desktop","Laptop","3rdMonDesktop","3rdMonLaptop")]
         $Device
     )
-
-    #Invoke-Item "C:\tools\controlmymonitor\SwitchMonitorInputs.bat"
     
     #Monitor names found in the ControlMyMonotor app
     $MonNameSamsungLeft = "H1AK500000"
