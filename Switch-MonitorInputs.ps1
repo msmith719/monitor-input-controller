@@ -44,14 +44,14 @@ function Switch-MonitorInputs {
     }
     elseif ($Device -eq 'Laptop') {
         #Set inputs for Laptop
-        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
-        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort
+        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
+        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
         Set-MonitorInputs -Monitor $MonNameHP24in -InputCode $HP_HDMI
     }
     else {
         #Set Inputs for Desktop
-        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
-        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
+        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
+        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort
         Set-MonitorInputs -Monitor $MonNameHP24in -InputCode $HP_DVI
     }
 }
