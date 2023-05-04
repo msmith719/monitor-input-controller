@@ -8,14 +8,14 @@ function Switch-MonitorInputs {
     #selector between the model number and \\.\DISPLAY...
     #The \\.\DISPLAY1\Monitor0 name will work too, but can change from time to time if a monitor 
     #is disconnected and reconnected
-    $MonNameSamsungLeft = "HNAW201368"
-    $MonNameSamsungRight = "H1AK500000"
+    $MonNameSamsungLeft = "HNAW201368" #Left Samsung 4k display
+    $MonNameSamsungRight = "H1AK500000" #Right Samsung 4k display
     $MonNameHP24in = "CNK7500YPK" #3rd Monitor
 
     function Set-MonitorInputs {
         param (
             [String]$Monitor,
-            $InputCode
+            [int]$InputCode
         )
         
         $MonToolPath = "c:\tools\controlmymonitor"
