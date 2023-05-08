@@ -2,7 +2,7 @@
 .SYNOPSIS
 Swiches monitor to specified inputs
 .DESCRIPTION
-Uses NirSoft's ControlMyMonitor to change the monitor input via a PowerShell function rather than manually changing the input source on the monitor. This is helpful when you have more than one monitor and need to switch between inputs frequently.
+Uses NirSoft's ControlMyMonitor to change the monitor input via a PowerShell function rather than manually changing the input source on the monitor. This is helpful when you have more than one monitor and need to switch between inputs frequently. The command can be run without explicitly specifying the device/device group; will set based on the defauls in "else".
 Download ControlMyMonitor from https://www.nirsoft.net/utils/control_my_monitor.html
 .PARAMETER  Device
 This is the device name or device group name that is used in the if/ifelse/else to specify which device(s) should be set to which input.
@@ -12,6 +12,8 @@ Switch-MonitorInputs 3rdMonDesktop
 Switch-MonitorInputs Desktop
 .EXAMPLE
 Switch-MonitorInputs Laptop
+.EXAMPLE
+Switch-MonitorInputs
 .INPUTS
 None
 .OUTPUTS
@@ -49,6 +51,9 @@ function Switch-MonitorInputs {
     $HP_DVI = 3
     $HP_VGA = 1
 
+    $hostnameLaptop = "umc"
+    $hostnameDesktop = "neb"
+
     #########################################
     # ---------- END Custom Inputs ----------
     #########################################
@@ -80,9 +85,20 @@ function Switch-MonitorInputs {
         Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_HDMI
     }
     else {
-        #Set Inputs for Desktop
-        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
-        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
-        Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_DVI
+        if (hostname -like $hostnameLaptop) {
+            #Set Inputs for Desktop
+            Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
+            Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
+            Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_DVI
+        }
+        elseif (hostname -like $hostnameDesktop) {
+            #Set inputs for Laptop
+            Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
+            Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort        
+            Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_HDMI
+        }
+        else {
+            Write-Error "Condition not meet. Edit/Truobleshoot the script."
+        }        
     }
 }
