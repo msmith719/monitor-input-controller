@@ -36,10 +36,10 @@ function Switch-MonitorInputs {
     $MonNameHP24Left = "CNK7410QLS" #3rd Monitor
     $MonNameHP24Right = "CNK7500YPK"
 
-    $MonToolPath = "c:\tools\controlmymonitor" #Where the ControlMyMonitor files live
-    $MonTool = "$MonToolPath\ControlMyMonitor.exe"
-
-    #Determining VCP codes for the inputs takes looking in the ControlMyMonitor 
+    #Where the ControlMyMonitor files live
+    $MonToolPath = "c:\tools\controlmymonitor" 
+    
+    #Determining VCP codes for the inputs requires looking in the ControlMyMonitor 
     #app and some trial and error
     # For Samsung 32" 4K UR59C monitor VCP input codes - DisplayPort: 15, HDMI: 6
     $Samsung_HDMI = 6
@@ -59,6 +59,8 @@ function Switch-MonitorInputs {
             [int]$InputCode
         )
         
+        $MonTool = "$MonToolPath\ControlMyMonitor.exe"
+
         #60 is the VCP code for Input/Source
         Start-Process $MonTool -ArgumentList "/SetValue $Monitor 60 $InputCode"
     }
