@@ -34,7 +34,7 @@ function Switch-MonitorInputs {
     #The \\.\DISPLAY1\Monitor0 name will work too, but can change from time to time if a monitor 
     #is disconnected and reconnected
     $MonNameSamsungLeft = "HNAW201368" #Left Samsung 4k display
-    $MonNameSamsungRight = "H1AK500000" #Right Samsung 4k display
+    $MonNameSamsungRight = "HNAW201367" #Right Samsung 4k display
     $MonNameHP24Left = "CNK7410QLS" #3rd Monitor
     $MonNameHP24Right = "CNK7500YPK"
 
