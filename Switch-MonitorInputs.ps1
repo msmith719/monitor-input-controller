@@ -40,6 +40,7 @@ function Switch-MonitorInputs {
 
     #Where the ControlMyMonitor files live
     $MonToolPath = "c:\tools\controlmymonitor" 
+    $MonTool = "$MonToolPath\ControlMyMonitor.exe"
     
     #Determining VCP codes for the inputs requires looking in the ControlMyMonitor 
     #app and some trial and error
@@ -63,8 +64,6 @@ function Switch-MonitorInputs {
             [String]$Monitor,
             [int]$InputCode
         )
-        
-        $MonTool = "$MonToolPath\ControlMyMonitor.exe"
 
         #60 is the VCP code for Input/Source
         Start-Process $MonTool -ArgumentList "/SetValue $Monitor 60 $InputCode"
@@ -90,21 +89,19 @@ function Switch-MonitorInputs {
         Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
         Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_DVI
     }
+    elseif ((hostname) -like "$hostnameLaptop*") {
+        #Set Inputs for Desktop
+        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
+        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
+        Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_DVI
+    }
+    elseif ((hostname) -like "$hostnameDesktop*") {
+        #Set inputs for Laptop
+        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
+        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort        
+        Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_HDMI
+    }
     else {
-        if ((hostname) -like "$hostnameLaptop*") {
-            #Set Inputs for Desktop
-            Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
-            Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
-            Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_DVI
-        }
-        elseif ((hostname) -like "$hostnameDesktop*") {
-            #Set inputs for Laptop
-            Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
-            Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort        
-            Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_HDMI
-        }
-        else {
-            Write-Error "Condition not meet. Edit/Troubleshoot the script."
-        }  
-    }      
+        Write-Error "Condition not meet. Edit/Troubleshoot the script."
+    }  
 }
