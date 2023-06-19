@@ -40,8 +40,7 @@ function Switch-MonitorInputs {
 
     #Where the ControlMyMonitor files live
     $MonToolPath = "c:\tools\controlmymonitor" 
-    $MonTool = "$MonToolPath\ControlMyMonitor.exe"
-    
+        
     #Determining VCP codes for the inputs requires looking in the ControlMyMonitor 
     #app and some trial and error
     # For Samsung 32" 4K UR59C monitor VCP input codes - DisplayPort: 15, HDMI: 6
@@ -59,6 +58,9 @@ function Switch-MonitorInputs {
     # ---------- END Custom Inputs ----------
     #########################################
 
+    #This is the program we will leverage to change the monitor input values
+    $MonTool = "$MonToolPath\ControlMyMonitor.exe"
+
     function Set-MonitorInputs {
         param (
             [String]$Monitor,
@@ -66,7 +68,7 @@ function Switch-MonitorInputs {
         )
 
         #60 is the VCP code for Input/Source
-        Start-Process $MonTool -ArgumentList "/SetValue $Monitor 60 $InputCode"
+        Start-Process -FilePath $MonTool -ArgumentList "/SetValue $Monitor 60 $InputCode"
     }
 
     if ($Device -eq "3rdMonDesktop") {
