@@ -51,6 +51,10 @@ function Switch-MonitorInputs {
     $HP_DVI = 3
     $HP_VGA = 1
 
+    #Values for setting powering on and off the monitors
+    $Samsung_ON = 1
+    $Samsung_OFF = 4
+
     $hostnameLaptop = "umc"
     $hostnameDesktop = "neb"
 
@@ -69,6 +73,16 @@ function Switch-MonitorInputs {
 
         #60 is the VCP code for Input/Source
         Start-Process -FilePath $MonTool -ArgumentList "/SetValue $Monitor 60 $InputCode"
+    }
+
+    function Set-MonitorPower {
+        param (
+            [String]$Monitor,
+            [int]$value
+        )
+
+        #D6 is the VCP code for Input/Source
+        Start-Process -FilePath $MonTool -ArgumentList "/SetValue $Monitor D6 $value"
     }
 
     if ($Device -eq "3rdMonDesktop") {
@@ -90,6 +104,10 @@ function Switch-MonitorInputs {
         Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
         Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
         Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_DVI
+
+        #Toggle power since this monitor takes forever sometimes to show the screen since it uses a Mini-DP to HDMI adapter.
+        Set-MonitorPower -Monitor $MonNameSamsungRight -value $Samsung_OFF
+        Set-MonitorPower -Monitor $MonNameSamsungRight -value $Samsung_ON
     }
     elseif ((hostname) -like "$hostnameLaptop*") {
         #Set Inputs for Desktop
