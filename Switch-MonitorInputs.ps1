@@ -93,13 +93,13 @@ function Switch-MonitorInputs {
         #Set 3rd monitor to Laptop
         Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_HDMI
     }
-    elseif ($Device -eq 'Laptop') {
+    elseif ( ($Device -eq 'Laptop') -or ((hostname) -like "$hostnameDesktop*") ) {
         #Set inputs for Laptop
         Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
         Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort        
         Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_HDMI
     }
-    elseif ($Device -eq 'Desktop') {
+    elseif ( ($Device -eq 'Desktop') -or ((hostname) -like "$hostnameLaptop*") ) {
         #Set Inputs for Desktop
         Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
         Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
@@ -108,18 +108,6 @@ function Switch-MonitorInputs {
         #Toggle power since this monitor takes forever sometimes to show the screen since it uses a Mini-DP to HDMI adapter.
         Set-MonitorPower -Monitor $MonNameSamsungRight -value $Samsung_OFF
         Set-MonitorPower -Monitor $MonNameSamsungRight -value $Samsung_ON
-    }
-    elseif ((hostname) -like "$hostnameLaptop*") {
-        #Set Inputs for Desktop
-        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_DisplayPort
-        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_HDMI
-        Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_DVI
-    }
-    elseif ((hostname) -like "$hostnameDesktop*") {
-        #Set inputs for Laptop
-        Set-MonitorInputs -Monitor $MonNameSamsungLeft -InputCode $Samsung_HDMI
-        Set-MonitorInputs -Monitor $MonNameSamsungRight -InputCode $Samsung_DisplayPort        
-        Set-MonitorInputs -Monitor $MonNameHP24Left -InputCode $HP_HDMI
     }
     else {
         Write-Error "Condition not meet. Edit/Troubleshoot the script."
